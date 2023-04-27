@@ -9,6 +9,9 @@ export function AudioPlayer({ trackList }: AudioPlayerProps) {
         if (playerState.kind == "PLAYING") player.current?.play()
     })
 
+    if (trackList.length == 0) 
+        return (<></>)
+
     let src;
 
     if (playerState.kind != "FINISHED")
