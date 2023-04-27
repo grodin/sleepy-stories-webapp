@@ -5,6 +5,7 @@
     "iOS >= 10"
   ],
   "devDependencies": {
+    "@parcel/resolver-glob": "^2.8.3",
     "@parcel/validator-typescript": "^2.8.3",
     "@tsconfig/recommended": "^1.0.2",
     "@types/react": "^18.2.0",
