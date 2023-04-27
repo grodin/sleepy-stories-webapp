@@ -26,3 +26,5 @@ yarn-error.log*
 # parcel
 /.parcel-cache
 /dist
+
+/src/media
