@@ -1,9 +1,14 @@
 import React from 'react';
-import sample from 'url:./media/sample.mp3';
+import * as audioFiles from 'url:./media/*.mp3'
+import { AudioPlayer } from './AudioPlayer';
 
 export function App() {
     return (
-
-        <><h1>Sleepy Stories</h1><audio controls src={sample} /></>
+        <>
+            <h1>Sleepy Stories</h1>
+            <AudioPlayer trackList={tracks} />
+        </>
     );
 }
+
+const tracks = Object.keys(audioFiles).map((key) => { return audioFiles[key as keyof typeof audioFiles] });
