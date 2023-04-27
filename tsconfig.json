@@ -1,7 +1,12 @@
 {
     "extends": "@tsconfig/recommended/tsconfig.json",
     "compilerOptions": {
-        "jsx": "react"
-
+        "jsx": "react",
+        "isolatedModules": true,
+        "strict": true
     },
+    "include": [
+        "src/**/*",
+        "types/*"
+    ]
 }
