@@ -1,4 +1,8 @@
 {
+  "name": "sleepy-stories-frontend",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "Joseph Cooper <cooper.joseph@gmail.com>",
   "source": "./src/index.html",
   "browserslist": [
     "default",
