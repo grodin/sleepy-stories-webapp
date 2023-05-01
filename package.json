@@ -3,11 +3,22 @@
   "version": "0.1.0",
   "license": "MIT",
   "author": "Joseph Cooper <cooper.joseph@gmail.com>",
+  "scripts": {
+    "clean": "rm -rf ./dist/release",
+    "clean-dev": "rm -rf ./dist/dev",
+    "build": "parcel build --target release",
+    "start": "parcel serve --dist-dir ./dist/dev --https"
+  },
   "source": "./src/index.html",
   "browserslist": [
     "defaults",
     "iOS >= 10"
   ],
+  "targets": {
+    "release": {
+      "distDir": "./dist/release"
+    }
+  },
   "devDependencies": {
     "@parcel/resolver-glob": "^2.8.3",
     "@parcel/validator-typescript": "^2.8.3",
