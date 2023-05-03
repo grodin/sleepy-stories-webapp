@@ -1,10 +1,12 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     alias(spring.plugins.boot)
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.ktfmt)
-    alias(libs.plugins.doctor)
+
+    alias(libs.plugins.convention.root)
+
     application
 }
 

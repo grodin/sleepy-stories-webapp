@@ -1,16 +1,27 @@
 [versions]
 kotlin = "1.8.20"
+detekt = "1.23.0-RC3"
 
-
+plugin_convention = "0.1"
 [libraries]
 
+
+##########################
+# Used in build-logic
+##########################
+detekt_cli = { module = "io.gitlab.arturbosch.detekt:detekt-cli", version.ref = "detekt" }
+detekt_gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+dependencyAnalysis_gradlePlugin = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version = "1.20.0" }
+doctor_gradlePlugin = { module = "com.osacky.doctor:doctor-plugin", version = "0.8.1" }
+kotlin_gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ktfmt_gradlePlugin = { module = "com.ncorti.ktfmt.gradle:plugin", version = "0.12.0" }
+
 [plugins]
-kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin_spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 kotlin_jpa = { id = "org.jetbrains.kotlin.jpa", version.ref = "kotlin" }
 
-detekt = "io.gitlab.arturbosch.detekt:1.23.0-RC3"
-ktfmt = "com.ncorti.ktfmt.gradle:0.12.0"
-doctor = "com.osacky.doctor:0.8.1"
-
-
+#####################
+# Convention plugins from build-logic
+#####################
+convention_root = { id = "com.omricat.gradle.convention.root", version.ref = "plugin_convention" }
