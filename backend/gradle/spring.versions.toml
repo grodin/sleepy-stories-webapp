@@ -1,0 +1,8 @@
+[versions]
+spring = "3.0.6"
+
+[libraries]
+starter_web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+
+[plugins]
+boot = {id = "org.springframework.boot", version.ref = "spring"}

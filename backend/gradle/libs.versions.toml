@@ -1,0 +1,16 @@
+[versions]
+kotlin = "1.8.20"
+
+
+[libraries]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin_spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin_jpa = { id = "org.jetbrains.kotlin.jpa", version.ref = "kotlin" }
+
+detekt = "io.gitlab.arturbosch.detekt:1.23.0-RC3"
+ktfmt = "com.ncorti.ktfmt.gradle:0.12.0"
+doctor = "com.osacky.doctor:0.8.1"
+
+
