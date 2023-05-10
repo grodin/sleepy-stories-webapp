@@ -1,23 +1,12 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+
 plugins {
     alias(spring.plugins.boot)
-    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.convention.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
-
-    alias(libs.plugins.convention.root)
-
     application
-}
-
-ktfmt { kotlinLangStyle() }
-
-dependencies {
-    implementation(
-        platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
-    )
-
-    implementation(spring.starter.web)
 }
 
 testing {
@@ -28,4 +17,25 @@ testing {
 
 java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
+group = "com.omricat"
+
+version = "0.1"
+
 application { mainClass.set("com.omricat.sleepystories.server.MainKt") }
+
+dependencies {
+    implementation(projects.frontend)
+
+    implementation(
+        platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+    )
+
+    implementation(spring.starter.web)
+    implementation(kotlin("reflect"))
+    implementation(spring.jackson.kotlin)
+    runtimeOnly(spring.devtools)
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach {
+    compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") }
+}

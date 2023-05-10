@@ -36,4 +36,9 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "backend"
+rootProject.name = "sleepy-stories"
+
+include(
+	"backend",
+	"frontend",
+)

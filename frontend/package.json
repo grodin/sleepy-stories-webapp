@@ -16,7 +16,7 @@
   ],
   "targets": {
     "release": {
-      "distDir": "./dist/release"
+      "distDir": "./build/frontend/static"
     }
   },
   "devDependencies": {

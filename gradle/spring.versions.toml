@@ -3,6 +3,8 @@ spring = "3.0.6"
 
 [libraries]
 starter_web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+devtools = { group = "org.springframework.boot", name = "spring-boot-devtools" }
+jackson_kotlin = {group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin"}
 
 [plugins]
 boot = {id = "org.springframework.boot", version.ref = "spring"}

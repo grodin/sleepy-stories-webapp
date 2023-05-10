@@ -25,7 +25,7 @@ dependencies {
     implementation(libs.doctor.gradlePlugin)
     implementation(libs.dependencyAnalysis.gradlePlugin)
 
-    compileOnly(libs.kotlin.gradlePlugin)
+    implementation(libs.kotlin.gradlePlugin)
 }
 
 val Provider<PluginDependency>.id: String
@@ -40,5 +40,10 @@ gradlePlugin {
             id = conventionPlugins.root.id
             implementationClass = "RootProjectPlugin"
         }
+        register("kotlin-jvm") {
+            id = conventionPlugins.kotlin.jvm.id
+            implementationClass = "KotlinProjectConventionPlugin"
+        }
+
     }
 }

@@ -5,7 +5,6 @@ detekt = "1.23.0-RC3"
 plugin_convention = "0.1"
 [libraries]
 
-
 ##########################
 # Used in build-logic
 ##########################
@@ -25,3 +24,4 @@ kotlin_jpa = { id = "org.jetbrains.kotlin.jpa", version.ref = "kotlin" }
 # Convention plugins from build-logic
 #####################
 convention_root = { id = "com.omricat.gradle.convention.root", version.ref = "plugin_convention" }
+convention_kotlin_jvm = { id = "com.omricat.gradle.convention.kotlin.jvm", version.ref = "plugin_convention" }
