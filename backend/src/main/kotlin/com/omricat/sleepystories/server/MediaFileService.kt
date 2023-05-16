@@ -16,7 +16,7 @@ public interface MediaFileService {
         public fun instance(basePath: Path): MediaFileService = DefaultMediaFileService(basePath)
     }
 
-    public object NullMediaFileService: MediaFileService {
+    public object NullMediaFileService : MediaFileService {
         override fun get(id: MediaFileId): Path? = null
 
         override fun asMap(): Map<MediaFileId, Path> = emptyMap()
@@ -34,8 +34,9 @@ private class DefaultMediaFileService(basePath: Path) : MediaFileService {
                 basePath,
                 1,
                 { path, fileAttributes ->
-//                    matcher.matches(path) &&
-                        fileAttributes.isRegularFile }
+                    //                    matcher.matches(path) &&
+                    fileAttributes.isRegularFile
+                }
             )
             .parallel()
             .asSequence()

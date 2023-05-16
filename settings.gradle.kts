@@ -2,7 +2,6 @@
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -39,6 +38,6 @@ dependencyResolutionManagement {
 rootProject.name = "sleepy-stories"
 
 include(
-	"backend",
-	"frontend",
+    "backend",
+    "frontend",
 )

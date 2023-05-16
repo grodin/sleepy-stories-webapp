@@ -44,6 +44,5 @@ gradlePlugin {
             id = conventionPlugins.kotlin.jvm.id
             implementationClass = "KotlinProjectConventionPlugin"
         }
-
     }
 }

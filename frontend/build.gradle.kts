@@ -18,10 +18,10 @@ val buildTask =
             "parcel",
             "build",
         )
-//        args.addAll(
-//            "--dist-dir",
-//            "${buildDir}/frontend/static",
-//        )
+        //        args.addAll(
+        //            "--dist-dir",
+        //            "${buildDir}/frontend/static",
+        //        )
         inputs.dir(project.fileTree("src"))
         inputs.dir(project.fileTree("node_modules"))
         inputs.files("package.json", "tsconfig.json", ".parcelrc")

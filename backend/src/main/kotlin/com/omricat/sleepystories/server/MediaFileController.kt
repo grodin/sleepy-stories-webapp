@@ -30,4 +30,5 @@ internal class MediaFileController(private val mediaFileService: MediaFileServic
         }
 }
 
-private fun Path?.throwIfNull(id: MediaFileId): Path = this ?: throw IOException("No file for id $id")
+private fun Path?.throwIfNull(id: MediaFileId): Path =
+    this ?: throw IOException("No file for id $id")

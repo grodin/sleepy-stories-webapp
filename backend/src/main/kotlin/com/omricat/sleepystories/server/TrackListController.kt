@@ -17,9 +17,7 @@ internal class TrackListController(
 
     @GetMapping("/api/track-list")
     fun trackList(): List<Track> =
-        mediaFileService.ids().map { id ->
-            Track(id = id, url = mediaUri(id))
-        }
+        mediaFileService.ids().map { id -> Track(id = id, url = mediaUri(id)) }
 }
 
 internal data class Track(val id: MediaFileId, val url: URI)
