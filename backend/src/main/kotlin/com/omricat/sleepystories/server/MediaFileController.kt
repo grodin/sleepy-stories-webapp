@@ -10,8 +10,15 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
+import kotlin.io.path.extension
 
 public val MPEG_MEDIA_TYPE: MediaType = MediaType.parseMediaType("audio/mpeg")
+public val OGG_MEDIA_TYPE: MediaType = MediaType.parseMediaType("audio/ogg")
+
+private val mediaTypeByExtension = mapOf(
+    "mp3" to MPEG_MEDIA_TYPE,
+    "ogg" to OGG_MEDIA_TYPE
+)
 
 public const val MEDIA_PATH: String = "/media"
 
@@ -22,9 +29,11 @@ internal class MediaFileController(private val mediaFileService: MediaFileServic
     @Throws(IOException::class)
     fun file(@PathVariable("id") id: MediaFileId): ResponseEntity<Resource> =
         mediaFileService[id].throwIfNull(id).let { path ->
+            val mediaType = mediaTypeByExtension[path.extension]
+                ?: return@let ResponseEntity.internalServerError().build()
             val resource = FileSystemResource(path)
             ResponseEntity.ok()
-                .contentType(MPEG_MEDIA_TYPE)
+                .contentType(mediaType)
                 .contentLength(resource.contentLength())
                 .body(resource)
         }
