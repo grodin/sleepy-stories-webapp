@@ -2,6 +2,7 @@ package com.omricat.sleepystories.server
 
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.io.path.isRegularFile
 import kotlin.streams.asSequence
 
 public interface MediaFileService {
@@ -27,16 +28,13 @@ public interface MediaFileService {
 
 private class DefaultMediaFileService(basePath: Path) : MediaFileService {
 
-    private val matcher = basePath.fileSystem.getPathMatcher("glob:*.mp3")
+    private val matcher = basePath.fileSystem.getPathMatcher("glob:*.{mp3,ogg}")
 
     private val idToPath: Map<MediaFileId, Path> =
         Files.find(
                 basePath,
                 1,
-                { path, fileAttributes ->
-                    //                    matcher.matches(path) &&
-                    fileAttributes.isRegularFile
-                }
+                { path, fileAttributes -> matcher.matches(path.fileName) && fileAttributes.isRegularFile }
             )
             .parallel()
             .asSequence()
