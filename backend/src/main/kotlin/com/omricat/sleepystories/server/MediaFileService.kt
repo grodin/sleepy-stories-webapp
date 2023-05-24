@@ -38,7 +38,9 @@ private class DefaultMediaFileService(basePath: Path) : MediaFileService {
         Files.find(
                 basePath,
                 1,
-                { path, fileAttributes -> matcher.matches(path.fileName) && fileAttributes.isRegularFile }
+                { path, fileAttributes ->
+                    matcher.matches(path.fileName) && fileAttributes.isRegularFile
+                }
             )
             .parallel()
             .asSequence()
