@@ -1,8 +1,12 @@
 package com.omricat.sleepystories.server
 
+import com.google.common.hash.Hashing
+import com.google.common.io.Files as GuavaFiles
+import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.io.path.isRegularFile
+import kotlin.jvm.Throws
 import kotlin.streams.asSequence
 
 public interface MediaFileService {
@@ -38,7 +42,7 @@ private class DefaultMediaFileService(basePath: Path) : MediaFileService {
             )
             .parallel()
             .asSequence()
-            .mapIndexed { i, path -> MediaFileId("$i") to path }
+            .map { path -> MediaFileId.fromFile(path) to path }
             .toMap()
 
     override fun get(id: MediaFileId): Path? = idToPath[id]
@@ -48,4 +52,12 @@ private class DefaultMediaFileService(basePath: Path) : MediaFileService {
     override fun ids(): Set<MediaFileId> = idToPath.keys
 }
 
-@JvmInline public value class MediaFileId(public val value: String)
+@JvmInline
+public value class MediaFileId(public val value: String) {
+    internal companion object {
+
+        @Throws(IOException::class)
+        fun fromFile(file: Path): MediaFileId =
+            MediaFileId(GuavaFiles.asByteSource(file.toFile()).hash(Hashing.sha256()).toString())
+    }
+}

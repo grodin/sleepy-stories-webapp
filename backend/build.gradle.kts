@@ -34,6 +34,8 @@ dependencies {
     implementation(kotlin("reflect"))
     implementation(spring.jackson.kotlin)
     runtimeOnly(spring.devtools)
+
+    implementation(libs.guava)
 }
 
 tasks.withType<KotlinCompilationTask<*>>().configureEach {

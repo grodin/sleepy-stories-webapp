@@ -1,9 +1,11 @@
 [versions]
 kotlin = "1.8.20"
 detekt = "1.23.0-RC3"
+guava = "31.1-jre"
 
 plugin_convention = "0.1"
 [libraries]
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 
 ##########################
 # Used in build-logic
