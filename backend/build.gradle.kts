@@ -6,8 +6,11 @@ plugins {
     alias(spring.plugins.boot)
     alias(libs.plugins.convention.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.jib)
     application
 }
+
+jib {}
 
 testing {
     suites {
