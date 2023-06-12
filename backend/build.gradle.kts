@@ -16,9 +16,7 @@ plugins {
 gitProperties { extProperty = "gitProperties" }
 
 jib {
-    to {
-        setTags(project.provider { setOf("latest", "v$version") })
-    }
+    to { setTags(project.provider { setOf("latest", "v$version") }) }
     from {
         val baseImage = "eclipse-temurin:17.0.7_7-jre-alpine"
         val baseImageDigest =

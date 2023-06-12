@@ -10,7 +10,8 @@ node {
     download.set(true)
 }
 
-val yarnInstallTask = tasks.findByName("yarn_install") ?: throw GradleException("Can't find the yarn_install task")
+val yarnInstallTask =
+    tasks.findByName("yarn_install") ?: throw GradleException("Can't find the yarn_install task")
 
 val buildTask =
     tasks.register<YarnTask>("buildFrontend") {
