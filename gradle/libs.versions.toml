@@ -3,6 +3,7 @@ kotlin = "1.8.20"
 detekt = "1.23.0-RC3"
 jib = "3.3.2"
 guava = "31.1-jre"
+git_properties_plugin = "2.4.1"
 
 plugin_convention = "0.1"
 [libraries]
@@ -19,6 +20,7 @@ kotlin_gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 ktfmt_gradlePlugin = { module = "com.ncorti.ktfmt.gradle:plugin", version = "0.12.0" }
 
 [plugins]
+git_properties = { id = "com.gorylenko.gradle-git-properties", version.ref = "git_properties_plugin" }
 jib = { id = "com.google.cloud.tools.jib", version.ref = "jib" }
 kotlin_jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin_spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
