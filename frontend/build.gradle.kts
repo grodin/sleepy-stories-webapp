@@ -10,10 +10,12 @@ node {
     download.set(true)
 }
 
+val yarnInstallTask = tasks.findByName("yarn_install") ?: throw GradleException("Can't find the yarn_install task")
+
 val buildTask =
     tasks.register<YarnTask>("buildFrontend") {
         description = "Build frontend with yarn"
-        dependsOn(tasks.yarnSetup)
+        dependsOn(yarnInstallTask)
         args.addAll(
             "parcel",
             "build",
