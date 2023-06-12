@@ -5,7 +5,9 @@ import com.google.common.io.Files as GuavaFiles
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Path
-import kotlin.io.path.isRegularFile
+import kotlin.io.path.exists
+import kotlin.io.path.isDirectory
+import kotlin.io.path.isReadable
 import kotlin.jvm.Throws
 import kotlin.streams.asSequence
 
@@ -18,10 +20,15 @@ public interface MediaFileService {
     public fun ids(): Set<MediaFileId>
 
     public companion object {
-        public fun instance(basePath: Path): MediaFileService = DefaultMediaFileService(basePath)
+        public fun instance(basePath: Path): MediaFileService =
+            if (basePath.exists() && basePath.isReadable() && basePath.isDirectory()) {
+                DefaultMediaFileService(basePath)
+            } else {
+                NullMediaFileService
+            }
     }
 
-    public object NullMediaFileService : MediaFileService {
+    private object NullMediaFileService : MediaFileService {
         override fun get(id: MediaFileId): Path? = null
 
         override fun asMap(): Map<MediaFileId, Path> = emptyMap()
@@ -42,10 +49,12 @@ private class DefaultMediaFileService(basePath: Path) : MediaFileService {
                     matcher.matches(path.fileName) && fileAttributes.isRegularFile
                 }
             )
-            .parallel()
-            .asSequence()
-            .map { path -> MediaFileId.fromFile(path) to path }
-            .toMap()
+            .use {
+                it.parallel()
+                    .asSequence()
+                    .map { path -> MediaFileId.fromFile(path) to path }
+                    .toMap()
+            }
 
     override fun get(id: MediaFileId): Path? = idToPath[id]
 
