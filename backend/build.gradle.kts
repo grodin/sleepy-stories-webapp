@@ -22,6 +22,16 @@ jib {
         val baseImageDigest =
             "sha256:5d1af3323cea5bd924875b911de740c1f07e68896331443a8add4ab2835a8430"
         image = "$baseImage@$baseImageDigest"
+        platforms {
+            platform {
+                architecture = "amd64"
+                os = "linux"
+            }
+            platform {
+                architecture = "arm64"
+                os = "linux"
+            }
+        }
     }
     container {
         val gitProperties: Map<String, String> by project.extra
