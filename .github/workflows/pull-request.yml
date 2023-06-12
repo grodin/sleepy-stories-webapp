@@ -1,0 +1,75 @@
+name: Build and test on pull request
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '17'
+  JAVA_DISTRIBUTION: 'temurin'
+
+jobs:
+  gradle-validation:
+    name: Gradle validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest
+        uses: actions/checkout@v3
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+  ktfmt:
+    name: 'Check *.kt *.kts with ktfmt'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup JDK ${{ env.JAVA_VERSION }}-${{ env.JAVA_DISTRIBUTION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Run ktfmt
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ktfmtCheckAllKtsAndKt
+          cache-read-only: false
+
+  detekt:
+    name: Run detekt
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK ${{ env.JAVA_VERSION }}-${{ env.JAVA_DISTRIBUTION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Run detekt
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: detektAll
+          cache-read-only: false
+
+
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup JDK ${{ env.JAVA_VERSION }}-${{ env.JAVA_DISTRIBUTION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Build and test with gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build test
