@@ -22,6 +22,20 @@ gradleEnterprise {
 }
 
 gitHooks {
+    preCommit {
+        from("#!/bin/sh") {
+            """
+            main_branch=main
+            branch="$(git rev-parse --abbrev-ref HEAD)"
+    
+            if [ "${'$'}branch" = "${'$'}main_branch" ]; then
+              echo "You can't commit directly to ${'$'}main_branch branch"
+              exit 1
+            fi
+            """
+                .trimIndent()
+        }
+    }
     commitMsg { conventionalCommits() }
     createHooks()
 }
