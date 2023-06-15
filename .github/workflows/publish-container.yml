@@ -3,7 +3,7 @@ name: "Build and publish container"
 on:
   workflow_dispatch:
   push:
-    tags: [ 'v*.*.*' ]
+    tags: [ 'v[0-9]+.[0-9]+.[0-9]+', 'v[0-9]+.[0-9]+' ]
 
 env:
   REGISTRY: ghcr.io
