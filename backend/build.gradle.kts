@@ -63,7 +63,7 @@ java { toolchain { languageVersion.set(JavaLanguageVersion.of(17)) } }
 
 group = "com.omricat"
 
-version = "0.3.0"
+version = "0.4.0"
 
 application { mainClass.set("com.omricat.sleepystories.server.MainKt") }
 
