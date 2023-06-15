@@ -18,9 +18,9 @@ gitProperties { extProperty = "gitProperties" }
 jib {
     to { setTags(project.provider { setOf("latest", "v$version") }) }
     from {
-        val baseImage = "eclipse-temurin:17.0.7_7-jre-alpine"
+        val baseImage = "eclipse-temurin:17-jre-ubi9-minimal"
         val baseImageDigest =
-            "sha256:5d1af3323cea5bd924875b911de740c1f07e68896331443a8add4ab2835a8430"
+            "sha256:41640b4547eca3bcf553ead39f4ca04a367d90cd77ee8a77d36194b093a9960e"
         image = "$baseImage@$baseImageDigest"
         platforms {
             platform {
