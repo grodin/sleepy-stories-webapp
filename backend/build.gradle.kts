@@ -36,7 +36,7 @@ jib {
     container {
         val gitProperties: Map<String, String> by project.extra
         creationTime.set(project.provider { gitProperties["git.commit.time"].toString() })
-        ports = listOf("80")
+        ports = listOf("8080")
         fun ociLabel(label: String, value: String) = "org.opencontainers.image.$label" to value
         labels.set(
             project.provider {
