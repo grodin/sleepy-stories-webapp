@@ -38,7 +38,9 @@ export function AudioPlayer({ trackList }: AudioPlayerProps) {
                 }}
             />
             <div>
-                {trackList[playerState.trackIndex].id}: {trackList[playerState.trackIndex].url.toString()}
+                {trackList[playerState.trackIndex].mediaMetadata.title}<br />
+                {trackList[playerState.trackIndex].mediaMetadata.artist}<br />
+                {trackList[playerState.trackIndex].mediaMetadata.album}
             </div>
         </div>
     );
