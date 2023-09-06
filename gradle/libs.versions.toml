@@ -4,10 +4,13 @@ detekt = "1.23.0-RC3"
 jib = "3.3.2"
 guava = "31.1-jre"
 git_properties_plugin = "2.4.1"
+jaudiotagger="3.0.1"
+
 
 plugin_convention = "0.1"
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
+jaudiotagger = {module = "net.jthink:jaudiotagger", version.ref = "jaudiotagger"}
 
 ##########################
 # Used in build-logic

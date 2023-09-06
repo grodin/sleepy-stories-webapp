@@ -25,11 +25,11 @@ internal class MediaFileController(private val mediaFileService: MediaFileServic
     @GetMapping("$MEDIA_PATH/{id}")
     @Throws(IOException::class)
     fun file(@PathVariable("id") id: MediaFileId): ResponseEntity<Resource> =
-        mediaFileService[id].throwIfNull(id).let { path ->
+        mediaFileService[id].throwIfNull(id).let { mediaFile ->
             val mediaType =
-                mediaTypeByExtension[path.extension]
+                mediaTypeByExtension[mediaFile.path.extension]
                     ?: return@let ResponseEntity.internalServerError().build()
-            val resource = FileSystemResource(path)
+            val resource = FileSystemResource(mediaFile.path)
             ResponseEntity.ok()
                 .contentType(mediaType)
                 .contentLength(resource.contentLength())
@@ -37,5 +37,5 @@ internal class MediaFileController(private val mediaFileService: MediaFileServic
         }
 }
 
-private fun Path?.throwIfNull(id: MediaFileId): Path =
+private fun MediaFile?.throwIfNull(id: MediaFileId): MediaFile =
     this ?: throw IOException("No file for id $id")

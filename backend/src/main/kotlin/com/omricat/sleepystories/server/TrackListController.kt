@@ -1,10 +1,10 @@
 package com.omricat.sleepystories.server
 
-import java.net.URI
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.DefaultUriBuilderFactory
 import org.springframework.web.util.UriBuilderFactory
+import java.net.URI
 
 @RestController
 internal class TrackListController(
@@ -17,7 +17,12 @@ internal class TrackListController(
 
     @GetMapping("/api/track-list")
     fun trackList(): List<Track> =
-        mediaFileService.ids().map { id -> Track(id = id, url = mediaUri(id)) }
+        mediaFileService
+            .asMap()
+            .map { (id, file) ->
+                Track(id = id, url = mediaUri(id), mediaMetadata = file.mediaMetadata)
+            }
+            .sortedBy { it.id.value }
 }
 
-internal data class Track(val id: MediaFileId, val url: URI)
+internal data class Track(val id: MediaFileId, val url: URI, val mediaMetadata: MediaMetadata)

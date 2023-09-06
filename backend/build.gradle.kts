@@ -77,9 +77,10 @@ dependencies {
     implementation(spring.starter.web)
     implementation(kotlin("reflect"))
     implementation(spring.jackson.kotlin)
-    runtimeOnly(spring.devtools)
+    developmentOnly(spring.devtools)
 
     implementation(libs.guava)
+    implementation(libs.jaudiotagger)
 }
 
 tasks.withType<KotlinCompilationTask<*>>().configureEach {
