@@ -17,9 +17,12 @@ internal class TrackListController(
 
     @GetMapping("/api/track-list")
     fun trackList(): List<Track> =
-        mediaFileService.asMap().map { (id, file) ->
-            Track(id = id, url = mediaUri(id), mediaMetadata = file.mediaMetadata)
-        }
+        mediaFileService
+            .asMap()
+            .map { (id, file) ->
+                Track(id = id, url = mediaUri(id), mediaMetadata = file.mediaMetadata)
+            }
+            .sortedBy { it.id.value }
 }
 
 internal data class Track(val id: MediaFileId, val url: URI, val mediaMetadata: MediaMetadata)
